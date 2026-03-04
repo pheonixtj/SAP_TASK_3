@@ -1,0 +1,60 @@
+unmanaged implementation in class zbp_cit_rs_hdr_rt_am058 unique;
+strict ( 2 );
+with draft;
+define behavior for ZCIT_RS_HDR_RT_AM058 alias Header
+implementation in class zbp_cit_rs_hdr_rt_am058 unique
+late numbering
+lock master total etag billing_date
+authorization master ( instance )
+draft table zcit_hdr_058_d
+{
+create;
+update;
+delete;
+association _Items { create; with draft; }
+action markAsPaid result [1] $self;
+field ( readonly ) bill_uuid, bill_number;
+field ( mandatory ) customer_name, billing_date, currency;
+field ( mandatory ) payment_status;
+// Draft Actions
+draft action Edit;
+draft action Activate;
+draft action Discard;
+draft action Resume;
+draft determine action Prepare;
+mapping for zcitrs_hdr_am058
+{
+bill_uuid = bill_uuid;
+bill_number = bill_number;
+customer_name = customer_name;
+billing_date = billing_date;
+total_amount = total_amount;
+currency = currency;
+payment_status = payment_status;
+}
+}
+define behavior for ZCIT_RS_ITM_RT_AM058 alias Item
+implementation in class zbp_cit_rs_hdr_rt_am058 unique
+lock dependent by _Header
+authorization dependent by _Header
+draft table zcit_itm_058_d
+{
+update;
+delete;
+association _Header { with draft; }
+field ( readonly ) bill_uuid, item_uuid;
+field ( mandatory ) product_id, quantity, unit_price;
+mapping for zcitrs_ITM_am058
+{
+item_uuid = item_uuid;
+bill_uuid = bill_uuid;
+item_position = item_position;
+product_id = product_id;
+product_name = product_name;
+quantity = quantity;
+quantityunits = quantityunits;
+unit_price = unit_price;
+subtotal = subtotal;
+currency = currency;
+}
+}

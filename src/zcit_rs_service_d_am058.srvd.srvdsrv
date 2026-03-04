@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition FOR RETAIL'
+define service ZCIT_RS_SERVICE_D_AM058 {
+  expose ZCIT_RS_HDR_CV_AM058 as Header;
+  expose ZCIT_RS_ITM_CV_AM058 as Item;
+}

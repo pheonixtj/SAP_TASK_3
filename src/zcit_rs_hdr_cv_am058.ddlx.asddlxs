@@ -1,0 +1,47 @@
+    @Metadata.layer: #CUSTOMER
+    @EndUserText.label: 'Header Metadata'
+    annotate entity ZCIT_RS_HDR_CV_AM058 with
+{
+@UI.facet: [
+{ id: 'HeaderInfo',
+purpose: #STANDARD,
+type: #IDENTIFICATION_REFERENCE,
+label: 'General Information',
+position: 10 },
+{ id: 'ItemsArea',
+purpose: #STANDARD,
+type: #LINEITEM_REFERENCE,
+label: 'Bill Items',
+position: 20,
+targetElement: '_Items' }
+]
+@UI.identification: [
+{ position: 70,
+type: #FOR_ACTION,
+dataAction: 'markAsPaid',
+label: 'Mark as Paid' },
+{ position: 80,
+type: #FOR_ACTION,
+dataAction: 'generatePDF',
+label: 'Download PDF' }
+]
+@UI.hidden: true
+bill_uuid;
+@UI: { lineItem: [{ position: 20, label: 'Bill Number' }],
+identification: [{ position: 20, label: 'Bill Number' }],
+selectionField: [{ position: 10 }] }
+bill_number;
+@UI: { lineItem: [{ position: 30, label: 'Customer Name' }],
+identification: [{ position: 30, label: 'Customer Name' }],
+selectionField: [{ position: 20 }] }
+customer_name;
+@UI: { lineItem: [{ position: 40, label: 'Billing Date' }],
+identification: [{ position: 40, label: 'Billing Date' }] }
+billing_date;
+@UI: { lineItem: [{ position: 50, label: 'Total Amount' }],
+identification: [{ position: 50, label: 'Total Amount' }] }
+total_amount;
+@UI: { lineItem: [{ position: 60, label: 'Payment Status' }],
+identification: [{ position: 60, label: 'Payment Status' }] }
+payment_status;
+}
